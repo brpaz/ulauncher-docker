@@ -1,0 +1,27 @@
+{
+  "manifest_version": "2",
+  "api_version": "1",
+  "name": "Docker",
+  "description": "Manage your Docker containers from Ulauncher",
+  "developer_name": "Bruno Paz",
+  "icon": "images/icon.png",
+  "options": {
+    "query_debounce": 0.2
+  },
+  "preferences": [
+    {
+      "id": "kw",
+      "type": "keyword",
+      "name": "Docker",
+      "description": "Manage Docker containers",
+      "default_value": "dk"
+    },
+    {
+      "id": "item_name",
+      "type": "input",
+      "name": "Item name",
+      "description": "Name for each item",
+      "default_value": "Item"
+    }
+  ]
+}
