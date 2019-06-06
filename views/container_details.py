@@ -38,7 +38,7 @@ class ContainerDetailsView(object):
         ports = container.attrs['NetworkSettings']['Ports']
 
         ports_list = []
-        for container_port, host_mapping in ports.iteritems():
+        for container_port, host_mapping in ports.items():
             if host_mapping is not None:
                 ports_str = "%s -> %s" % (container_port,  "%s:%s" % (
                     host_mapping[0]['HostIp'], host_mapping[0]['HostPort']))
@@ -47,7 +47,7 @@ class ContainerDetailsView(object):
         ip_address = container.attrs['NetworkSettings']['IPAddress']
 
         if not ip_address:
-            ip_address = attrs['NetworkSettings']['Networks'].values()[
+            ip_address = list(attrs['NetworkSettings']['Networks'].values())[
                 0]['IPAddress']
 
         items.append(ExtensionResultItem(
