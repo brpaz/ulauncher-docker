@@ -8,7 +8,7 @@ from ulauncher.api.shared.action.RenderResultListAction import RenderResultListA
 from ulauncher.api.shared.action.RunScriptAction import RunScriptAction
 
 
-class UtilsView(object):
+class UtilsView():
     """ Display some Utils functions """
 
     def __init__(self, extension):
@@ -18,19 +18,21 @@ class UtilsView(object):
         """ Render view """
         items = []
         data = [{
-            'name': 'Clean',
-            'description': 'Cleanup unusued Docker containers and images',
-            'action': RunScriptAction(
-                "x-terminal-emulator -e docker system prune -a", [])
+            'name':
+            'Clean',
+            'description':
+            'Cleanup unusued Docker containers and images',
+            'action':
+            RunScriptAction("x-terminal-emulator -e docker system prune -a",
+                            [])
         }]
 
         for item in data:
-            items.append(ExtensionResultItem(
-                icon='images/icon.png',
-                name=item['name'],
-                highlightable=False,
-                description=item['description'],
-                on_enter=item['action']
-            ))
+            items.append(
+                ExtensionResultItem(icon='images/icon.png',
+                                    name=item['name'],
+                                    highlightable=False,
+                                    description=item['description'],
+                                    on_enter=item['action']))
 
         return RenderResultListAction(items)

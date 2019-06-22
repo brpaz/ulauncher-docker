@@ -1,1 +1,2 @@
-from dk.client import *
+""" Docker client module """
+from dk.client import Client

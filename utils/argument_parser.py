@@ -4,7 +4,6 @@ import argparse
 
 class ArgumentError(Exception):
     """ Exception with the argument parser fails """
-    pass
 
 
 class ArgumentParser(argparse.ArgumentParser):

@@ -1,7 +1,9 @@
 # ulauncher-docker
 
-[![Build Status](https://img.shields.io/travis/com/brpaz/ulauncher-docker.svg)](https://github.com/brpaz/ulauncher-docker)
-[![GitHub license](https://img.shields.io/github/license/brpaz/ulauncher-docker.svg)](https://github.com/brpaz/:ulauncher-docker/blob/master/LICENSE)
+[![Ulauncher Extension](https://img.shields.io/badge/Ulauncher-Extension-green.svg?style=for-the-badge)](https://ext.ulauncher.io/-/github-brpaz-ulauncher-docker)
+[![CircleCI](https://img.shields.io/circleci/build/github/brpaz/ulauncher-docker.svg?style=for-the-badge)](https://circleci.com/gh/brpaz/ulauncher-docker)
+![License](https://img.shields.io/github/license/brpaz/ulauncher-docker.svg?style=for-the-badge)
+
 
 > Manage your Docker containers from Ulauncher
 
@@ -18,13 +20,13 @@
 
 ## Requirements
 
-- Ulauncher
-- Python >= 2.7 with packages:
+- Ulauncher 5
+- Python >= 3
 - Docker daemon running on your machine
 
 This extension also needs [docker-py](https://github.com/docker/docker-py) and [argparse](https://pypi.org/project/argparse) Python packages.
 
-You can install them in one command using: `pip install argparse docker`
+You can install them in one command using: `pip3 install argparse docker`
 
 ## Install
 
@@ -61,12 +63,15 @@ To see your changes, stop ulauncher and run it from the command line with: `ulau
 
 ## Contributing
 
-- Fork it!
-- Create your feature branch: git checkout -b my-new-feature
-- Commit your changes: git commit -am 'Add some feature'
-- Push to the branch: git push origin my-new-feature
-- Submit a pull request :D
+Contributions, issues and Features requests are welcome.
 
-## License
+## Show your support
 
-MIT &copy; Bruno Paz
+<a href="https://www.buymeacoffee.com/Z1Bu6asGV" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
+
+## License 
+
+Copywright @ 2019 [Bruno Paz](https://github.com/brpaz)
+
+This project is [MIT](LLICENSE) Licensed.

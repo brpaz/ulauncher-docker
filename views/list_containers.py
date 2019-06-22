@@ -5,7 +5,7 @@ from ulauncher.api.shared.action.RenderResultListAction import RenderResultListA
 from ulauncher.api.shared.action.SetUserQueryAction import SetUserQueryAction
 
 
-class ListContainersView(object):
+class ListContainersView():
     """ List containers view """
 
     def __init__(self, extension):
@@ -27,12 +27,13 @@ class ListContainersView(object):
 
         items = []
         for container in containers:
-            items.append(ExtensionResultItem(
-                icon='images/icon.png',
-                name=container.name,
-                description=container.status,
-                on_enter=SetUserQueryAction(
-                    "%s -c %s" % (event.get_keyword(), container.short_id))
-            ))
+            items.append(
+                ExtensionResultItem(
+                    icon='images/icon.png',
+                    name=container.name,
+                    description=container.status,
+                    on_enter=SetUserQueryAction(
+                        "%s -c %s" %
+                        (event.get_keyword(), container.short_id))))
 
         return RenderResultListAction(items)

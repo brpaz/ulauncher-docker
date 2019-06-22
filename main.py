@@ -1,3 +1,4 @@
+
 """
 Ulauncher Docker Extension
 Manage your Docker containers from Ulauncher
@@ -7,16 +8,17 @@ import logging
 import gi
 import docker
 
-gi.require_version('Notify', '0.7')
-
+from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
+from ulauncher.api.client.EventListener import EventListener
+from ulauncher.api.client.Extension import Extension
 from gi.repository import Notify
 
-from ulauncher.api.client.Extension import Extension
-from ulauncher.api.client.EventListener import EventListener
-from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
-from utils.constants import *  # pylint: disable=wildcard-import
-from utils import ArgumentParser, ArgumentError
 from views import ListContainersView, ContainerDetailsView, InfoView, UtilsView
+from utils import ArgumentParser
+from utils.constants import *  # pylint: disable=wildcard-import
+
+gi.require_version('Notify', '0.7')
+
 
 LOGGING = logging.getLogger(__name__)
 
@@ -33,10 +35,16 @@ class DockerExtension(Extension):
 
         parser = ArgumentParser()
         parser.add_argument('-c', '--c', action='store', dest='container_id')
-        parser.add_argument('-a', '--a', action='store_true', default=False,
+        parser.add_argument('-a',
+                            '--a',
+                            action='store_true',
+                            default=False,
                             dest='all_containers')
-        parser.add_argument('-i', '--i', action='store_true',
-                            default=False, dest='info')
+        parser.add_argument('-i',
+                            '--i',
+                            action='store_true',
+                            default=False,
+                            dest='info')
 
         self.arg_parser = parser
 
@@ -63,11 +71,11 @@ class DockerExtension(Extension):
         """
         try:
             self.docker_client.containers.get(container_id).start()
-            self.show_notification(
-                "Container %s started with success" % container_id)
+            self.show_notification("Container %s started with success" %
+                                   container_id)
         except:  # pylint: disable=bare-except
-            self.show_notification(
-                "Failed to start container %s" % container_id)
+            self.show_notification("Failed to start container %s" %
+                                   container_id)
 
     def stop_container(self, container_id):
         """
@@ -77,11 +85,11 @@ class DockerExtension(Extension):
         """
         try:
             self.docker_client.containers.get(container_id).stop()
-            self.show_notification(
-                "Container %s stopped with success" % container_id)
+            self.show_notification("Container %s stopped with success" %
+                                   container_id)
         except:  # pylint: disable=bare-except
-            self.show_notification(
-                "Failed to stop container %s" % container_id)
+            self.show_notification("Failed to stop container %s" %
+                                   container_id)
 
     def restart_container(self, container_id):
         """
@@ -91,11 +99,11 @@ class DockerExtension(Extension):
         """
         try:
             self.docker_client.containers.get(container_id).restart()
-            self.show_notification(
-                "Container %s restarted with success" % container_id)
+            self.show_notification("Container %s restarted with success" %
+                                   container_id)
         except:  # pylint: disable=bare-except
-            self.show_notification(
-                "Failed to restart container %s" % container_id)
+            self.show_notification("Failed to restart container %s" %
+                                   container_id)
 
 
 class KeywordQueryEventListener(EventListener):
@@ -107,23 +115,20 @@ class KeywordQueryEventListener(EventListener):
 
         query = event.get_argument() or ""
 
-        try:
-            args, _ = extension.arg_parser.parse_known_args(
-                query.split())
+        args, _ = extension.arg_parser.parse_known_args(query.split())
 
-            if query.strip() == "utils":
-                return extension.utils_view.execute()
+        if query.strip() == "utils":
+            return extension.utils_view.execute()
 
-            if (args.info or query.strip() == "info"):
-                return extension.info_view.execute()
+        if args.info or query.strip() == "info":
+            return extension.info_view.execute()
 
-            if (args.container_id is not None):
-                return extension.container_details_view.execute(args.container_id)
+        if args.container_id is not None:
+            return extension.container_details_view.execute(
+                args.container_id)
 
-            return extension.list_containers_view.execute(event, query, not args.all_containers)
-
-        except ArgumentError:
-            return
+        return extension.list_containers_view.execute(
+            event, query, not args.all_containers)
 
 
 class ItemEnterEventListener(EventListener):

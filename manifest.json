@@ -12,15 +12,8 @@
       "id": "kw",
       "type": "keyword",
       "name": "Docker",
-      "description": "Manage Docker containers",
+      "description": "List Docker containers",
       "default_value": "dk"
-    },
-    {
-      "id": "item_name",
-      "type": "input",
-      "name": "Item name",
-      "description": "Name for each item",
-      "default_value": "Item"
     }
   ]
 }

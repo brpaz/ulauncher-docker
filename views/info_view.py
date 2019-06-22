@@ -7,7 +7,7 @@ from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 from ulauncher.api.shared.action.OpenUrlAction import OpenUrlAction
 
 
-class InfoView(object):
+class InfoView():
     """ Displays some information about the Docker daemon """
 
     def __init__(self, extension):
@@ -30,19 +30,22 @@ class InfoView(object):
                 'action': OpenUrlAction("https://docs.docker.com/")
             },
             {
-                'name': 'Awesome Docker',
-                'description': 'Awesome Docker',
-                'action': OpenUrlAction("https://list.community/veggiemonk/awesome-docker")
+                'name':
+                'Awesome Docker',
+                'description':
+                'Awesome Docker',
+                'action':
+                OpenUrlAction(
+                    "https://list.community/veggiemonk/awesome-docker")
             },
         ]
 
         for item in data:
-            items.append(ExtensionResultItem(
-                icon='images/icon.png',
-                name=item['name'],
-                highlightable=False,
-                description=item['description'],
-                on_enter=item['action']
-            ))
+            items.append(
+                ExtensionResultItem(icon='images/icon.png',
+                                    name=item['name'],
+                                    highlightable=False,
+                                    description=item['description'],
+                                    on_enter=item['action']))
 
         return RenderResultListAction(items)
