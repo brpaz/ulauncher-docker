@@ -24,9 +24,11 @@
 - Python >= 3
 - Docker daemon running on your machine
 
-This extension also needs [docker-py](https://github.com/docker/docker-py) and [argparse](https://pypi.org/project/argparse) Python packages.
+This extension also needs [docker-py](https://github.com/docker/docker-py) <= 3.7.2 and [argparse](https://pypi.org/project/argparse) Python packages.
 
-You can install them in one command using: `pip3 install argparse docker`
+You can install them in one command using: `pip3 install argparse docker==3.7.2`
+
+**NOTE: Installing the latest `docker-py` client will break the extension as the client changed the API interface for several methods.**
 
 ## Install
 
