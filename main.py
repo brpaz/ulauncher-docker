@@ -158,8 +158,8 @@ class PreferencesUpdateEventListener(EventListener):
 
     def on_event(self, event, extension):
 
-        if event.id == "shel_type":
-            extension.shel_type = event.new_value
+        if event.id == "shell_type":
+            extension.shell_type = event.new_value
 
 class PreferencesEventListener(EventListener):
 
