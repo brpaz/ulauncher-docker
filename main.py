@@ -8,7 +8,7 @@ import logging
 import gi
 import docker
 
-from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
+from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent, PreferencesUpdateEvent, PreferencesEvent
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.client.Extension import Extension
 from gi.repository import Notify
@@ -32,6 +32,8 @@ class DockerExtension(Extension):
         self.docker_client = docker.from_env()
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
         self.subscribe(ItemEnterEvent, ItemEnterEventListener())
+        self.subscribe(PreferencesUpdateEvent, PreferencesUpdateEventListener())
+        self.subscribe(PreferencesEvent, PreferencesEventListener())
 
         parser = ArgumentParser()
         parser.add_argument('-c', '--c', action='store', dest='container_id')
@@ -150,6 +152,19 @@ class ItemEnterEventListener(EventListener):
         if data['action'] == ACTION_START_CONTAINER:
             LOGGING.info("Starting container %s", data['id'])
             extension.start_container(data['id'])
+
+
+class PreferencesUpdateEventListener(EventListener):
+
+    def on_event(self, event, extension):
+
+        if event.id == "shel_type":
+            extension.shel_type = event.new_value
+
+class PreferencesEventListener(EventListener):
+
+    def on_event(self, event, extension):
+        extension.shell_type = event.preferences["shell_type"]
 
 
 if __name__ == '__main__':

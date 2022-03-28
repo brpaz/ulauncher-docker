@@ -93,17 +93,17 @@ class ContainerDetailsView():
             items.append(
                 ExtensionResultItem(
                     icon='images/icon_terminal.png',
-                    name="Open container shell",
-                    description="Opens a new sh shell in the container",
+                    name="Open container in {0}".format(self.extension.shell_type),
+                    description="Opens a new {0} terminal in the container".format(self.extension.shell_type),
                     highlightable=False,
                     on_enter=RunScriptAction(
-                        "x-terminal-emulator -e docker exec -it %s sh" %
+                        "x-terminal-emulator -e docker exec -it %s {0}".format(self.extension.shell_type) %
                         container.short_id, [])))
 
             items.append(
                 ExtensionResultItem(icon='images/icon_stop.png',
                                     name="Stop",
-                                    description="Stops The container",
+                                    description="Stops the container",
                                     highlightable=False,
                                     on_enter=ExtensionCustomAction({
                                         'action':

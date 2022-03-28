@@ -14,6 +14,23 @@
       "name": "Docker",
       "description": "List Docker containers",
       "default_value": "dk"
+    },
+    {
+      "id": "shell_type",
+      "type": "select",
+      "name": "Type of shell",
+      "description": "List Docker containers",
+      "options": [
+        {
+          "value": "bash",
+          "text": "bash"
+        },
+        {
+          "value": "sh",
+          "text": "sh"
+        }
+      ],
+      "default_value": "sh"
     }
   ]
 }
