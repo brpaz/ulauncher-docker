@@ -13,7 +13,7 @@ class InfoView():
     def __init__(self, extension):
         self.extension = extension
 
-    def execute(self):
+    def render(self):
         """ Show docker info """
         info = self.extension.docker_client.version()
 

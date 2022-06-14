@@ -8,7 +8,7 @@ from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 from ulauncher.api.shared.action.OpenUrlAction import OpenUrlAction
 from ulauncher.api.shared.action.CopyToClipboardAction import CopyToClipboardAction
 from ulauncher.api.shared.action.RunScriptAction import RunScriptAction
-from utils.constants import *  # pylint: disable=wildcard-import
+from dk.actions import ACTION_START_CONTAINER, ACTION_STOP_CONTAINER, ACTION_RESTART_CONTAINER
 
 
 class ContainerDetailsView():
@@ -17,7 +17,7 @@ class ContainerDetailsView():
     def __init__(self, extension):
         self.extension = extension
 
-    def execute(self, container_id):
+    def render(self, container_id):
         """ Show container details """
 
         try:
@@ -25,13 +25,14 @@ class ContainerDetailsView():
                 container_id)
         except docker.errors.NotFound:
             return RenderResultListAction([
-                ExtensionResultItem(icon='images/icon.png',
+                ExtensionResultItem(icon=self.extension.icon_path,
                                     name="No container found with id %s" %
                                     container_id,
                                     highlightable=False,
                                     on_enter=HideWindowAction())
             ])
 
+        default_terminal = self.extension.preferences["default_terminal"]
         items = []
 
         attrs = container.attrs
@@ -53,7 +54,7 @@ class ContainerDetailsView():
             ip_address = list(ips)[0]['IPAddress']
 
         items.append(
-            ExtensionResultItem(icon='images/icon.png',
+            ExtensionResultItem(icon=self.extension.icon_path,
                                 name=container.name,
                                 description=attrs['Config']['Image'],
                                 highlightable=False,
@@ -97,8 +98,8 @@ class ContainerDetailsView():
                     description="Opens a new sh shell in the container",
                     highlightable=False,
                     on_enter=RunScriptAction(
-                        "x-terminal-emulator -e docker exec -it %s sh" %
-                        container.short_id, [])))
+                        "%s -e docker exec -it %s sh" %
+                        (default_terminal, container.short_id), [])))
 
             items.append(
                 ExtensionResultItem(icon='images/icon_stop.png',
@@ -125,13 +126,13 @@ class ContainerDetailsView():
                                     })))
 
             items.append(
-                ExtensionResultItem(
-                    icon='images/icon_logs.png',
-                    name="Logs",
-                    description="Show logs of the container",
-                    highlightable=False,
-                    on_enter=RunScriptAction(
-                        "x-terminal-emulator -e docker logs -f %s" %
-                        container.short_id, [])))
+                ExtensionResultItem(icon='images/icon_logs.png',
+                                    name="Logs",
+                                    description="Show logs of the container",
+                                    highlightable=False,
+                                    on_enter=RunScriptAction(
+                                        "%s -e docker logs -f %s" %
+                                        (default_terminal, container.short_id),
+                                        [])))
 
         return RenderResultListAction(items)

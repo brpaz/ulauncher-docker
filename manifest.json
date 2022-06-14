@@ -11,9 +11,47 @@
     {
       "id": "kw",
       "type": "keyword",
-      "name": "Docker",
+      "name": "Docker: List Containers",
       "description": "List Docker containers",
       "default_value": "dk"
+    },
+    {
+      "id": "kw_info",
+      "type": "keyword",
+      "name": "Docker: Info",
+      "description": "Show Docker Daemon information",
+      "default_value": "dk:info"
+    },
+    {
+      "id": "kw_prune",
+      "type": "keyword",
+      "name": "Docker: Prune Containers",
+      "description": "Cleanup unused Docker containers and images",
+      "default_value": "dk:prune"
+    },
+    {
+      "id": "kw_documentation",
+      "type": "keyword",
+      "name": "Docker: Search Documentation",
+      "description": "Search on Docker default_value",
+      "default_value": "dk:docs"
+    },
+    {
+      "id": "default_terminal",
+      "type": "select",
+      "name": "Default Terminal",
+      "description": "The default terminal to use when running commends on the command line",
+      "default_value": "gnome-terminal",
+      "options": [
+        {
+          "value": "gnome-terminal",
+          "text": "Gnome Terminal"
+        },
+        {
+          "value": "tilix",
+          "text": "Tilix"
+        }
+      ]
     }
   ]
 }
