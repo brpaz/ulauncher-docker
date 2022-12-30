@@ -98,7 +98,7 @@ class ContainerDetailsView():
                     description="Opens a new sh shell in the container",
                     highlightable=False,
                     on_enter=RunScriptAction(
-                        "%s -e docker exec -it %s sh" %
+                        "%s -- docker exec -it %s sh" %
                         (default_terminal, container.short_id), [])))
 
             items.append(
@@ -131,7 +131,7 @@ class ContainerDetailsView():
                                     description="Show logs of the container",
                                     highlightable=False,
                                     on_enter=RunScriptAction(
-                                        "%s -e docker logs -f %s" %
+                                        "%s -- docker logs -f %s" %
                                         (default_terminal, container.short_id),
                                         [])))
 
